@@ -4,9 +4,12 @@ var file;
 var numOfUsers = 0;
 var roomid;
 var usernameid;
+var readyState;
 
-function Chat (filetxt) { //alert(filetxt);
+function Chat (filetxt,currtState) { //alert(filetxt);
 	file = filetxt;
+	readyState = currtState;
+	
 	this.init = chatInit;
     this.update = updateChat;
     this.send = sendChat;
@@ -29,7 +32,7 @@ $.ajaxSetup({
 
 //gets the state of the chat
 function getStateOfChat(){ 		//alert(file);
-	 $.ajax({
+	/* $.ajax({
 		   type: "POST",
 		   url: "process.php",
 		   data: {  
@@ -38,11 +41,12 @@ function getStateOfChat(){ 		//alert(file);
 					},
 		    dataType: "json",
 		
-		   success: function(data){ //alert(data);
-			   state = data.state-5;
+		   success: function(data){ //alert(data);*/
+			   state = readyState;
+			   
 			   updateChat();
-		   },
-		});
+		/*   },
+		});*/
 }
 		 
 //Updates the chat
