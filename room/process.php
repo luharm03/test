@@ -1,10 +1,15 @@
 <?php
+	
+//http://localhost/Chat2/room/update.php?_=1379402749622&state=-1&file=Room1379154988.txt
 
   $function = htmlentities(strip_tags($_POST['function']), ENT_QUOTES);
 	$file = htmlentities(strip_tags($_POST['file']), ENT_QUOTES);
     
   $log = array();
-    
+    $date = date("l jS  F Y");
+ $lines = file($file);
+
+ 
     switch ($function) {
     
     	 case ('getState'):
@@ -24,15 +29,16 @@
 			 $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 			 $blankexp = "/^\n/";
 			 $message = htmlentities(strip_tags($_POST['message']), ENT_QUOTES);
-			 
+			
     		 if (!preg_match($blankexp, $message)) {
             	
     			 if (preg_match($reg_exUrl, $message, $url)) {
            			$message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
     			 } 
     			 $message = preg_replace($patterns, $replacements, $message);
-            	
-            	 fwrite(fopen($file, 'a'), "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"); 
+			 //fwrite(fopen($file, 'a'),"\n".date("Y-m-d")."\n");
+			    	   include("test.php");
+            	 fwrite(fopen($file, 'a'),"[".date("h:i:s A")."]<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"); 
     		 }
     		break;
     	
